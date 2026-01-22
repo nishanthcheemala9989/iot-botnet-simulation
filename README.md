@@ -1,45 +1,90 @@
-HEAD
-# IoT Botnet Simulation (CCNS Project)
-
-Docker-based lab simulation of IoT botnet behavior using MQTT (Mosquitto) with:
-- C2 server
-- Device simulators (telemetry)
-- Victim HTTP server
-- Optional monitoring (Prometheus/Grafana)
-- Optional IDS outputs (Suricata/Zeek) - not committed
-
-## How to run
-1) Install Docker Desktop
-2) In project folder:
-   docker compose up -d --build
-
-## Notes
-This is a safe lab setup for academic demonstration.
-
-\# IoT Botnet Simulation (CCNS Project)
+\# IoT Botnet Simulation \& Detection (CCNS)
 
 
 
-This project demonstrates an IoT botnet attack and mitigation
-
-using Docker, MQTT (Mosquitto), and monitoring tools.
+Docker-based lab project to simulate IoT botnet-style command \& control over MQTT and observe network behavior using monitoring / IDS.
 
 
 
-Components:
+\## What this demonstrates
 
-\- C2 Server
+\- MQTT broker (Mosquitto) used as messaging backbone
 
-\- IoT Device Simulator
+\- C2 server publishes commands and receives device telemetry
 
-\- Victim Server
+\- Device simulators publish periodic telemetry
 
-\- Optional IDS and monitoring
+\- Victim service to validate controlled request behavior
+
+\- Optional monitoring: Prometheus + Grafana
+
+\- Optional IDS: Suricata / Zeek (outputs ignored in Git)
 
 
 
-For academic use only.
+\## Architecture
+
+Device(s) -> MQTT Broker -> C2 Server
+
+C2 Server -> Victim Server (controlled traffic)
+
+Monitoring: Prometheus scrapes metrics, Grafana dashboards
 
 
 
- b70b592 (Add README)
+\## Tech Stack
+
+\- Docker / Docker Compose
+
+\- Python (paho-mqtt)
+
+\- Mosquitto (MQTT)
+
+\- Prometheus + Grafana (optional)
+
+\- Suricata / Zeek (optional)
+
+
+
+\## How to run
+
+1\) Install Docker Desktop
+
+2\) From project root:
+
+&nbsp;  docker compose up -d --build
+
+3\) Check containers:
+
+&nbsp;  docker ps
+
+
+
+\## Repo structure
+
+\- c2/                 : C2 server code + Dockerfile
+
+\- device/             : IoT device simulator
+
+\- victim/             : victim service
+
+\- mosquitto-config/   : broker config
+
+\- monitoring/         : prometheus/grafana configs (optional)
+
+
+
+\## Safety / Disclaimer
+
+This is a controlled academic lab simulation. No real-world attack usage.
+
+
+
+\## Resume bullets (copy-ready)
+
+\- Built a multi-container IoT security lab using Docker Compose (MQTT broker, C2, device simulators, victim service).
+
+\- Implemented MQTT telemetry + command channel and validated behavior using monitoring/IDS tooling (Prometheus/Grafana, Suricata/Zeek).
+
+
+
